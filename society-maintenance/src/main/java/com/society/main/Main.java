@@ -139,6 +139,8 @@ public class Main extends javax.swing.JFrame {
     private void register() {
         ModelUser user = loginAndRegister.getUser();
         showMessage(Message.MessageType.SUCCESS, "Test Message");
+        verifyCode.setVisible(true);
+
 //        System.out.println(user.getEmail());
 //        loading.setVisible(true);
 //        System.out.println("Clicked on Register");
@@ -162,10 +164,10 @@ public class Main extends javax.swing.JFrame {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                loading.setVisible(true);
+//                loading.setVisible(true);
                 ModelMessage ms = new ServiceMail().sendMain(user.getEmail(), user.getVerifyCode());
                 if (ms.isSuccess()) {
-                    loading.setVisible(false);
+//                    loading.setVisible(false);
                     verifyCode.setVisible(true);
                 } else {
                     loading.setVisible(false);
