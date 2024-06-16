@@ -1,37 +1,52 @@
 package com.society.main;
 
+import com.society.components.Message;
 import com.society.components.PanelCover;
+import com.society.components.PanelLoading;
 import com.society.components.PanelLoginAndRegister;
+import com.society.components.PanelVerifyCode;
+import com.society.models.ModelUser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import javax.swing.JLayeredPane;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class Main extends javax.swing.JFrame {
-
+    
     private final DecimalFormat df = new DecimalFormat("##0.###", DecimalFormatSymbols.getInstance(Locale.US));
     private MigLayout layout;
     private PanelCover cover;
+    private PanelLoading loading;
+    private PanelVerifyCode verifyCode;
     private PanelLoginAndRegister loginAndRegister;
-    private boolean isLogin = true;
+    private boolean isLogin;
     private final double addSize = 30;
     private final double coverSize = 40;
     private final double loginSize = 60;
-
+    
     public Main() {
         initComponents();
         init();
     }
-
+    
     private void init() {
         layout = new MigLayout("fill, insets 0");
         cover = new PanelCover();
-        loginAndRegister = new PanelLoginAndRegister();
+        loading = new PanelLoading();
+        verifyCode = new PanelVerifyCode();
+        ActionListener eventRegister = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                register();
+            }
+        };
+        loginAndRegister = new PanelLoginAndRegister(eventRegister);
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
@@ -69,7 +84,7 @@ public class Main extends javax.swing.JFrame {
                 layout.setComponentConstraints(loginAndRegister, "width " + loginSize + "%, pos " + fractionLogin + "al 0 n 100%");
                 bg.revalidate();
             }
-
+            
             @Override
             public void end() {
                 isLogin = !isLogin;
@@ -80,10 +95,12 @@ public class Main extends javax.swing.JFrame {
         animator.setDeceleration(0.5f);
         animator.setResolution(0);  //  for smooth animation
         bg.setLayout(layout);
-        bg.add(cover, "width " + coverSize + "%, pos " + (isLogin ? "1al" : "0al") + " 0 n 100%");
-        bg.add(loginAndRegister, "width " + loginSize + "%, pos " + (isLogin ? "0al" : "1al") + " 0 n 100%"); //  1al as 100%
-        loginAndRegister.showRegister(!isLogin);
-        cover.login(isLogin);
+        bg.setLayer(loading, JLayeredPane.POPUP_LAYER);
+        bg.setLayer(verifyCode, JLayeredPane.POPUP_LAYER);
+        bg.add(loading, "pos 0 0 100% 100%");
+        bg.add(verifyCode, "pos 0 0 100% 100%");
+        bg.add(cover, "width " + coverSize + "%, pos 0al 0 n 100%");
+        bg.add(loginAndRegister, "width " + loginSize + "%, pos 1al 0 n 100%"); //  1al as 100%
         cover.addEvent(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -93,7 +110,72 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void register() {
+        ModelUser user = loginAndRegister.getUser();
+        showMessage(Message.MessageType.SUCCESS, "Test Message");
+//        System.out.println(user.getEmail());
+//        loading.setVisible(true);
+//        System.out.println("Clicked on Register");
+//        verifyCode.setVisible(true);
 
+    }
+    
+    private void showMessage(Message.MessageType messageType, String message) {
+        Message ms = new Message();
+        ms.showMessage(messageType, message);
+        TimingTarget target = new TimingTargetAdapter() {
+            @Override
+            public void begin() {
+                if (!ms.isShow()) {
+                    bg.add(ms, "pos 0.5al -30", 0); //  Insert to bg fist index 0
+                    ms.setVisible(true);
+                    bg.repaint();
+                }
+            }
+            
+            @Override
+            public void timingEvent(float fraction) {
+                float f;
+                if (ms.isShow()) {
+                    f = 40 * (1f - fraction);
+                } else {
+                    f = 40 * fraction;
+                }
+                layout.setComponentConstraints(ms, "pos 0.5al " + (int) (f - 30));
+                bg.repaint();
+                bg.revalidate();
+            }
+            
+            @Override
+            public void end() {
+                if (ms.isShow()) {
+                    bg.remove(ms);
+                    bg.repaint();
+                    bg.revalidate();
+                } else {
+                    ms.setShow(true);
+                }
+            }
+        };
+        Animator animator = new Animator(300, target);
+        animator.setResolution(0);
+        animator.setAcceleration(0.5f);
+        animator.setDeceleration(0.5f);
+        animator.start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    animator.start();
+                } catch (InterruptedException e) {
+                    System.err.println(e);
+                }
+            }
+        }).start();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

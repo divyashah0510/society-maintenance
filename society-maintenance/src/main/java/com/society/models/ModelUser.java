@@ -42,6 +42,9 @@ public class ModelUser {
         this.verifyCode = verifyCode;
     }
 
+    public ModelUser() {
+    }
+
     public ModelUser(int userID, String userName, String email, String password, String verifyCode) {
         this.userID = userID;
         this.userName = userName;
@@ -49,15 +52,11 @@ public class ModelUser {
         this.password = password;
         this.verifyCode = verifyCode;
     }
-
     public ModelUser(int userID, String userName, String email, String password) {
         this.userID = userID;
         this.userName = userName;
         this.email = email;
         this.password = password;
-    }
-
-    public ModelUser() {
     }
 
     private int userID;

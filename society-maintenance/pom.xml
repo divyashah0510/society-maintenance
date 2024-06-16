@@ -39,10 +39,10 @@
                 <includes>
                     <include>**/*.png</include>
                     <include>**/*.jpg</include>
+                    <include>**/*.gif</include>
                     <include>**/*.properties</include>
                 </includes>
             </resource>
         </resources>
     </build>
-
 </project>
