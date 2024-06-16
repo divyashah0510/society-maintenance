@@ -5,9 +5,14 @@ import com.society.components.PanelCover;
 import com.society.components.PanelLoading;
 import com.society.components.PanelLoginAndRegister;
 import com.society.components.PanelVerifyCode;
+import com.society.connection.DatabaseConnection;
+import com.society.models.ModelMessage;
 import com.society.models.ModelUser;
+import com.society.services.ServiceMail;
+import com.society.services.ServiceUser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
@@ -18,7 +23,8 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 public class Main extends javax.swing.JFrame {
-    
+
+    private ServiceUser service;
     private final DecimalFormat df = new DecimalFormat("##0.###", DecimalFormatSymbols.getInstance(Locale.US));
     private MigLayout layout;
     private PanelCover cover;
@@ -29,15 +35,16 @@ public class Main extends javax.swing.JFrame {
     private final double addSize = 30;
     private final double coverSize = 40;
     private final double loginSize = 60;
-    
+
     public Main() {
         initComponents();
         init();
     }
-    
+
     private void init() {
         layout = new MigLayout("fill, insets 0");
         cover = new PanelCover();
+        service = new ServiceUser();
         loading = new PanelLoading();
         verifyCode = new PanelVerifyCode();
         ActionListener eventRegister = new ActionListener() {
@@ -84,7 +91,7 @@ public class Main extends javax.swing.JFrame {
                 layout.setComponentConstraints(loginAndRegister, "width " + loginSize + "%, pos " + fractionLogin + "al 0 n 100%");
                 bg.revalidate();
             }
-            
+
             @Override
             public void end() {
                 isLogin = !isLogin;
@@ -109,8 +116,26 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         });
+        verifyCode.addEventButtonOK(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    ModelUser user = loginAndRegister.getUser();
+                    if (service.verifyCodeWithUser(user.getUserID(), verifyCode.getInputCode())) {
+                        service.doneVerify(user.getUserID());
+                        showMessage(Message.MessageType.SUCCESS, "Register Success");
+                        verifyCode.setVisible(false);
+                    } else {
+                        showMessage(Message.MessageType.ERROR, "Error");
+                    }
+                } catch (Exception ae) {
+                    showMessage(Message.MessageType.ERROR, "Error");
+                    System.out.println("Error is " + ae);
+                }
+            }
+        });
     }
-    
+
     private void register() {
         ModelUser user = loginAndRegister.getUser();
         showMessage(Message.MessageType.SUCCESS, "Test Message");
@@ -118,9 +143,38 @@ public class Main extends javax.swing.JFrame {
 //        loading.setVisible(true);
 //        System.out.println("Clicked on Register");
 //        verifyCode.setVisible(true);
-
+        try {
+            if (service.checkDuplicateUser(user.getUserName())) {
+                showMessage(Message.MessageType.ERROR, "User name already exists!");
+            } else if (service.checkDuplicateEmail(user.getEmail())) {
+                showMessage(Message.MessageType.ERROR, "Email already exists");
+            } else {
+                service.insertUser(user);
+                sendMain(user);
+            }
+        } catch (SQLException e) {
+            showMessage(Message.MessageType.ERROR, "Error Register");
+            System.out.println("Error is" + e);
+        }
     }
-    
+
+    private void sendMain(ModelUser user) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                loading.setVisible(true);
+                ModelMessage ms = new ServiceMail().sendMain(user.getEmail(), user.getVerifyCode());
+                if (ms.isSuccess()) {
+                    loading.setVisible(false);
+                    verifyCode.setVisible(true);
+                } else {
+                    loading.setVisible(false);
+                    showMessage(Message.MessageType.ERROR, ms.getMessage());
+                }
+            }
+        }).start();
+    }
+
     private void showMessage(Message.MessageType messageType, String message) {
         Message ms = new Message();
         ms.showMessage(messageType, message);
@@ -133,7 +187,7 @@ public class Main extends javax.swing.JFrame {
                     bg.repaint();
                 }
             }
-            
+
             @Override
             public void timingEvent(float fraction) {
                 float f;
@@ -146,7 +200,7 @@ public class Main extends javax.swing.JFrame {
                 bg.repaint();
                 bg.revalidate();
             }
-            
+
             @Override
             public void end() {
                 if (ms.isShow()) {
@@ -175,7 +229,7 @@ public class Main extends javax.swing.JFrame {
             }
         }).start();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -239,7 +293,13 @@ public class Main extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        try {
+            DatabaseConnection.getInstance().connectToDatabase();
+        } catch (SQLException e) {
+            System.out.println("Error is " + e);
+        }
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Main().setVisible(true);
             }
