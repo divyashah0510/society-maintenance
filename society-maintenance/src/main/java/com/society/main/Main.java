@@ -6,6 +6,7 @@ import com.society.components.PanelLoading;
 import com.society.components.PanelLoginAndRegister;
 import com.society.components.PanelVerifyCode;
 import com.society.connection.DatabaseConnection;
+import com.society.models.ModelLogin;
 import com.society.models.ModelMessage;
 import com.society.models.ModelUser;
 import com.society.services.ServiceMail;
@@ -53,7 +54,14 @@ public class Main extends javax.swing.JFrame {
                 register();
             }
         };
-        loginAndRegister = new PanelLoginAndRegister(eventRegister);
+        ActionListener eventLogin = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                login();
+            }
+        };
+
+        loginAndRegister = new PanelLoginAndRegister(eventRegister, eventLogin);
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             public void timingEvent(float fraction) {
@@ -157,6 +165,22 @@ public class Main extends javax.swing.JFrame {
         } catch (SQLException e) {
             showMessage(Message.MessageType.ERROR, "Error Register");
             System.out.println("Error is" + e);
+        }
+    }
+
+    private void login() {
+        ModelLogin data = loginAndRegister.getDataLogin();
+        try {
+            ModelUser user = service.login(data);
+            if (user != null) {
+                this.dispose();
+                MainSystem.main(user);
+            } else {
+                showMessage(Message.MessageType.ERROR, "Email and Password incorrect");
+            }
+
+        } catch (SQLException e) {
+            showMessage(Message.MessageType.ERROR, "Error Login");
         }
     }
 

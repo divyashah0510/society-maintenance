@@ -1,5 +1,6 @@
 package com.society.components;
 
+import com.society.models.ModelLogin;
 import com.society.models.ModelUser;
 import com.society.swing.Button;
 import com.society.swing.MyPasswordField;
@@ -16,16 +17,22 @@ import net.miginfocom.swing.MigLayout;
 
 public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
+    public ModelLogin getDataLogin() {
+        return dataLogin;
+    }
+
     public ModelUser getUser() {
         return user;
     }
 
     private ModelUser user;
 
-    public PanelLoginAndRegister(ActionListener eventRegister) {
+    private ModelLogin dataLogin;
+
+    public PanelLoginAndRegister(ActionListener eventRegister, ActionListener eventLogin) {
         initComponents();
         initRegister(eventRegister);
-        initLogin();
+        initLogin(eventLogin);
         login.setVisible(false);
         register.setVisible(true);
     }
@@ -65,13 +72,13 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
                 String userName = txtUser.getText().trim();
                 String email = txtEmail.getText().trim();
                 String password = String.valueOf(txtPass.getPassword());
-                user = new ModelUser(0, userName, email, password);
+                setUser(new ModelUser(0, userName, email, password));
 
             }
         });
     }
 
-    private void initLogin() {
+    private void initLogin(ActionListener eventLogin) {
         login.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]10[]25[]push"));
         JLabel label = new JLabel("Sign In");
         label.setFont(new Font("sansserif", 1, 30));
@@ -94,8 +101,17 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         Button cmd = new Button();
         cmd.setBackground(new Color(7, 164, 121));
         cmd.setForeground(new Color(250, 250, 250));
+        cmd.addActionListener(eventLogin);
         cmd.setText("SIGN IN");
         login.add(cmd, "w 40%, h 40");
+        cmd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                String email = txtEmail.getText().trim();
+                String password = String.valueOf(txtPass.getPassword());
+                dataLogin = new ModelLogin(email, password);
+            }
+        });
     }
 
     public void showRegister(boolean show) {
@@ -153,4 +169,8 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     private javax.swing.JPanel login;
     private javax.swing.JPanel register;
     // End of variables declaration//GEN-END:variables
+
+    public void setUser(ModelUser user) {
+        this.user = user;
+    }
 }
