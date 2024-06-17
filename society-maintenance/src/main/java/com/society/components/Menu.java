@@ -1,5 +1,6 @@
 package com.society.components;
 
+import com.society.event.EventMenuSelected;
 import com.society.models.Model_Menu;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -12,6 +13,13 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
 
 public class Menu extends javax.swing.JPanel {
+
+    private EventMenuSelected event;
+
+    public void addEventMenuSelected(EventMenuSelected event) {
+        this.event = event;
+        listMenu1.addEventMenuSelected(event);
+    }
 
     public Menu() {
         initComponents();

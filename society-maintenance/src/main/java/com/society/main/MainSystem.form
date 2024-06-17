@@ -25,15 +25,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="panelBorder1" max="32767" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-          </Group>
+          <Component id="panelBorder1" min="-2" max="-2" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="568" max="-2" attributes="0"/>
                   <Component id="lbUser" min="-2" pref="75" max="-2" attributes="0"/>
-                  <EmptySpace pref="600" max="32767" attributes="0"/>
+                  <EmptySpace pref="567" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -45,7 +42,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="358" max="-2" attributes="0"/>
                   <Component id="lbUser" min="-2" pref="30" max="-2" attributes="0"/>
-                  <EmptySpace pref="441" max="32767" attributes="0"/>
+                  <EmptySpace pref="320" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -71,14 +68,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="menu1" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="sp" min="-2" pref="1029" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                          <Component id="header1" min="-2" pref="1036" max="-2" attributes="0"/>
-                      </Group>
+                  <Component id="menu" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="header1" pref="1003" max="32767" attributes="0"/>
+                      <Component id="mainPanel" max="32767" attributes="0"/>
                   </Group>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -87,32 +83,25 @@
               <Group type="102" attributes="0">
                   <Component id="header1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="sp" pref="784" max="32767" attributes="0"/>
+                  <Component id="mainPanel" max="32767" attributes="0"/>
               </Group>
-              <Component id="menu1" alignment="0" max="32767" attributes="0"/>
+              <Component id="menu" alignment="0" pref="708" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
         <Component class="com.society.components.Header" name="header1">
         </Component>
-        <Component class="com.society.components.Menu" name="menu1">
+        <Component class="com.society.components.Menu" name="menu">
         </Component>
-        <Container class="javax.swing.JScrollPane" name="sp">
+        <Container class="javax.swing.JPanel" name="mainPanel">
           <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
-            </Property>
-            <Property name="viewportBorder" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f2" green="f2" red="f2" type="rgb"/>
             </Property>
           </Properties>
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="com.society.form.Form_Home" name="form_Home1">
-            </Component>
-          </SubComponents>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
         </Container>
       </SubComponents>
     </Container>
