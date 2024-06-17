@@ -38,6 +38,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.png</include>
+                    <include>****/**.png</include>
                     <include>**/*.jpg</include>
                     <include>**/*.gif</include>
                     <include>**/*.properties</include>
