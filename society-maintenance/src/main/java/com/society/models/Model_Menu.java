@@ -1,5 +1,6 @@
 package com.society.models;
 
+import java.net.URL;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -43,13 +44,12 @@ public class Model_Menu {
     }
 
     public Icon toIcon() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        java.net.URL iconURL = classLoader.getResource("com/society/icon/" + icon + ".png");
+        URL iconURL = getClass().getResource("/com/society/icons/" + icon + ".png");
         System.out.println("Loading resource: " + iconURL);
         if (iconURL != null) {
             return new ImageIcon(iconURL);
         } else {
-            System.err.println("Resource not found: com/society/icon/" + icon + ".png");
+            System.err.println("Resource not found: /com/society/icons/" + icon + ".png");
             return null;
         }
     }
