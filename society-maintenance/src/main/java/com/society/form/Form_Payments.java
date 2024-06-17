@@ -1,13 +1,13 @@
 package com.society.form;
 
 
-public class Form_View extends javax.swing.JPanel {
+public class Form_Payments extends javax.swing.JPanel {
 
-      public Form_View() {
+
+    public Form_Payments() {
         initComponents();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -18,7 +18,7 @@ public class Form_View extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Form View");
+        jLabel1.setText("Form Payements");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

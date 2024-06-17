@@ -1,8 +1,10 @@
 package com.society.form;
 
-public class Form_Bill extends javax.swing.JPanel {
 
-    public Form_Bill() {
+public class Form_Notices extends javax.swing.JPanel {
+
+
+    public Form_Notices() {
         initComponents();
     }
 
@@ -16,7 +18,7 @@ public class Form_Bill extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Form Bill");
+        jLabel1.setText("Form Notices");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

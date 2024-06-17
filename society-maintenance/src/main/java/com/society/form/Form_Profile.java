@@ -1,10 +1,10 @@
 package com.society.form;
 
 
-public class Form_Edit extends javax.swing.JPanel {
+public class Form_Profile extends javax.swing.JPanel {
 
 
-    public Form_Edit() {
+    public Form_Profile() {
         initComponents();
     }
 
@@ -18,7 +18,7 @@ public class Form_Edit extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Form Edit");
+        jLabel1.setText("Form Profile");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

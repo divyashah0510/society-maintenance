@@ -1,12 +1,17 @@
 package com.society.main;
 
+import com.society.components.MessageDialog;
 import com.society.event.EventMenuSelected;
-import com.society.form.Form_Bill;
-import com.society.form.Form_Edit;
+import com.society.form.Form_Amenities;
+import com.society.form.Form_Events;
+import com.society.form.Form_Residents;
+import com.society.form.Form_Maintenance;
 import com.society.form.Form_Home;
-import com.society.form.Form_View;
+import com.society.form.Form_Notices;
+import com.society.form.Form_Payments;
+import com.society.form.Form_Profile;
+import com.society.form.Form_Reports;
 import com.society.models.ModelUser;
-import com.society.swing.ScrollBar;
 import java.awt.Color;
 import javax.swing.JComponent;
 
@@ -14,9 +19,14 @@ public class MainSystem extends javax.swing.JFrame {
 
     private final ModelUser user;
     private Form_Home home;
-    private Form_Bill formBill;
-    private Form_Edit formEdit;
-    private Form_View formView;
+    private Form_Residents formResidents;
+    private Form_Maintenance formMaintainence;
+    private Form_Events formEvents;
+    private Form_Payments formPayments;
+    private Form_Notices formNotices;
+    private Form_Amenities amenities;
+    private Form_Reports reports;
+    private Form_Profile profile;
 
     public MainSystem(ModelUser user) {
         this.user = user;
@@ -24,28 +34,58 @@ public class MainSystem extends javax.swing.JFrame {
         setBackground(new Color(0, 0, 0, 0));
         lbUser.setText(user.getUserName());
         menu.initMoving(MainSystem.this);
-//        sp.setVerticalScrollBar(new ScrollBar());
+        home = new Form_Home();
+        setForm(home);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
+                System.out.println("Currently on " + index);
                 switch (index) {
                     case 0:
                         home = new Form_Home();
                         setForm(home);
                         break;
                     case 1:
-                        formBill = new Form_Bill();
-                        setForm(formBill);
+                        formResidents = new Form_Residents();
+                        setForm(formResidents);
                         break;
                     case 2:
-                        formEdit = new Form_Edit();
-                        setForm(formEdit);
+                        formMaintainence = new Form_Maintenance();
+                        setForm(formMaintainence);
                         break;
                     case 3:
-                        formView = new Form_View();
-                        setForm(formView);
+                        formEvents = new Form_Events();
+                        setForm(formEvents);
                         break;
-
+                    case 4:
+                        formPayments = new Form_Payments();
+                        setForm(formPayments);
+                        break;
+                    case 8:
+                        formNotices = new Form_Notices();
+                        setForm(formNotices);
+                        break;
+                    case 9:
+                        amenities = new Form_Amenities();
+                        setForm(amenities);
+                        break;
+                    case 10:
+                        reports = new Form_Reports();
+                        setForm(reports);
+                        break;
+                    case 11:
+                        profile = new Form_Profile();
+                        setForm(profile);
+                        break;
+                    case 12:
+                        MessageDialog obj = new MessageDialog(MainSystem.this);
+                        obj.showMessage("LogOut", "Are you sure you want to Exit ??");
+                        if (obj.getMessageType() == MessageDialog.MessageType.OK) {
+                            System.out.println("User click ok");
+                        } else {
+                            System.out.println("User click cancel");
+                        }
+                        break;
                     default:
                         throw new AssertionError();
                 }

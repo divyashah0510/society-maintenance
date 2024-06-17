@@ -45,7 +45,7 @@ public class Model_Menu {
 
     public Icon toIcon() {
         URL iconURL = getClass().getResource("/com/society/icons/" + icon + ".png");
-        System.out.println("Loading resource: " + iconURL);
+//        System.out.println("Loading resource: " + iconURL);
         if (iconURL != null) {
             return new ImageIcon(iconURL);
         } else {
