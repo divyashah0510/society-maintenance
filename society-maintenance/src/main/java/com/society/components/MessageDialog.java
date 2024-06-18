@@ -1,5 +1,8 @@
 package com.society.components;
 
+import com.society.main.Main;
+import com.society.main.MainSystem;
+import com.society.models.ModelUser;
 import com.society.swing.Glass;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
@@ -19,6 +22,7 @@ public class MessageDialog extends javax.swing.JDialog {
     private Glass glass;
     private boolean show;
     private MessageType messageType = MessageType.CANCEL;
+    private ModelUser user;
 
     public MessageDialog(JFrame fram) {
         super(fram, true);
@@ -198,7 +202,11 @@ public class MessageDialog extends javax.swing.JDialog {
     private void cmdOkayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdOkayActionPerformed
         messageType = MessageType.OK;
         closeMessage();
-        System.exit(0);
+        JFrame parentframe = (JFrame) this.getParent();
+        parentframe.dispose();
+        
+        Main component = new Main();
+        component.setVisible(true);
     }//GEN-LAST:event_cmdOkayActionPerformed
 
     private void cmdCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelActionPerformed

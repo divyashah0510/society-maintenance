@@ -79,9 +79,10 @@ public class MainSystem extends javax.swing.JFrame {
                         break;
                     case 12:
                         MessageDialog obj = new MessageDialog(MainSystem.this);
-                        obj.showMessage("LogOut", "Are you sure you want to Exit ??");
+                        obj.showMessage("LogOut", "Are you sure you want to Logout ??");
                         if (obj.getMessageType() == MessageDialog.MessageType.OK) {
                             System.out.println("User click ok");
+                            
                         } else {
                             System.out.println("User click cancel");
                         }
