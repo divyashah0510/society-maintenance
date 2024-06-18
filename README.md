@@ -21,6 +21,8 @@ It is a java based project which is used to manage the maintenance of a society.
 4. Swing
 5. Netbeans
 6. Jakarta Mail API
+7. JasperSoft Studio
+8. iReport Designer
 
 # How to run the project
 
