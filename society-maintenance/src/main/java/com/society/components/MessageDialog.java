@@ -204,7 +204,6 @@ public class MessageDialog extends javax.swing.JDialog {
         closeMessage();
         JFrame parentframe = (JFrame) this.getParent();
         parentframe.dispose();
-        
         Main component = new Main();
         component.setVisible(true);
     }//GEN-LAST:event_cmdOkayActionPerformed

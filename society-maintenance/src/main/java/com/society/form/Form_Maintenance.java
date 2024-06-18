@@ -1,8 +1,12 @@
 package com.society.form;
 
+import com.society.components.MessageDialog;
+import java.awt.print.PrinterException;
+import java.text.MessageFormat;
+import javax.swing.JFrame;
+import javax.swing.JTable;
 
 public class Form_Maintenance extends javax.swing.JPanel {
-
 
     public Form_Maintenance() {
         initComponents();
@@ -31,7 +35,9 @@ public class Form_Maintenance extends javax.swing.JPanel {
         jTextField2 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        button1 = new com.society.swing.Button();
+        printBill = new com.society.swing.Button();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        table = new com.society.swing.Table();
 
         setBackground(new java.awt.Color(242, 242, 242));
 
@@ -65,8 +71,8 @@ public class Form_Maintenance extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE))
-                        .addGap(0, 131, Short.MAX_VALUE)))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         noticeLayout.setVerticalGroup(
@@ -82,7 +88,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(1, 1, 1)
                 .addComponent(jLabel5)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         crazyPanel1.setBackground(new java.awt.Color(242, 242, 242));
@@ -183,24 +189,45 @@ public class Form_Maintenance extends javax.swing.JPanel {
         gridBagConstraints.weighty = 4.0;
         crazyPanel1.add(jDateChooser2, gridBagConstraints);
 
-        button1.setBackground(new java.awt.Color(0, 153, 51));
-        button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("Generate Bill");
-        button1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        printBill.setBackground(new java.awt.Color(0, 153, 51));
+        printBill.setForeground(new java.awt.Color(255, 255, 255));
+        printBill.setText("Generate Bill");
+        printBill.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        printBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printBillActionPerformed(evt);
+            }
+        });
+
+        table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"98uru`h9k9u", "89u8u8u98j", "8988", "u8u988"},
+                {"u988h", "8u8", "988n", "8u98j"},
+                {"98un", "98u98jn", "9898j", "989un"},
+                {"9u9j", "98unu", "u8j09", "ujn00"}
+            },
+            new String [] {
+                "Bill No", "Bill Date", "Name", "Flat No.:"
+            }
+        ));
+        jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(notice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(crazyPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(notice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(crazyPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(printBill, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,16 +237,41 @@ public class Form_Maintenance extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(notice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(crazyPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(crazyPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(printBill, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void printBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printBillActionPerformed
+        MessageFormat header = new MessageFormat("Disha Residency CO OP Housing Society.");
+        MessageFormat footer = new MessageFormat("Dish Residency Housing Society");
+        try {
+            System.out.println("Performing print action");
+            table.print(JTable.PrintMode.NORMAL, header, footer);
+
+        } catch (PrinterException e) {
+            System.err.println("Error is " + e);
+        }
+    }
+
+    private JFrame getParentFrame() {
+        java.awt.Component parent = this;
+        while (parent.getParent() != null) {
+            parent = parent.getParent();
+            if (parent instanceof JFrame) {
+                return (JFrame) parent;
+            }
+        }
+        return null;
+    }//GEN-LAST:event_printBillActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.society.swing.Button button1;
     private raven.crazypanel.CrazyPanel crazyPanel1;
     private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -234,9 +286,12 @@ public class Form_Maintenance extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private com.society.swing.PanelRound notice;
+    private com.society.swing.Button printBill;
+    private com.society.swing.Table table;
     // End of variables declaration//GEN-END:variables
 }
