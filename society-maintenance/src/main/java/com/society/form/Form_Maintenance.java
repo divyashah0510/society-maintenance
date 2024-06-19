@@ -3,13 +3,20 @@ package com.society.form;
 import com.society.components.MessageDialog;
 import java.awt.print.PrinterException;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Form_Maintenance extends javax.swing.JPanel {
 
     public Form_Maintenance() {
         initComponents();
+        initMaintenance_Bill();
+    }
+
+    public void initMaintenance_Bill() {
+
     }
 
     @SuppressWarnings("unchecked")
@@ -24,20 +31,21 @@ public class Form_Maintenance extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        crazyPanel1 = new raven.crazypanel.CrazyPanel();
+        billPanel = new raven.crazypanel.CrazyPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        txtBillNo = new com.society.swing.TextField();
+        txtName = new com.society.swing.TextField();
+        txtFlat = new com.society.swing.TextField();
+        billDate = new com.toedter.calendar.JDateChooser();
+        dueDate = new com.toedter.calendar.JDateChooser();
         printBill = new com.society.swing.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new com.society.swing.Table();
+        addBill = new com.society.swing.Button();
 
         setBackground(new java.awt.Color(242, 242, 242));
 
@@ -91,8 +99,8 @@ public class Form_Maintenance extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        crazyPanel1.setBackground(new java.awt.Color(242, 242, 242));
-        crazyPanel1.setLayout(new java.awt.GridBagLayout());
+        billPanel.setBackground(new java.awt.Color(242, 242, 242));
+        billPanel.setLayout(new java.awt.GridBagLayout());
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -103,16 +111,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 4.4;
         gridBagConstraints.weighty = 4.0;
-        crazyPanel1.add(jLabel6, gridBagConstraints);
-
-        jTextField1.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 40.0;
-        gridBagConstraints.weighty = 4.0;
-        crazyPanel1.add(jTextField1, gridBagConstraints);
+        billPanel.add(jLabel6, gridBagConstraints);
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -123,14 +122,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 4.4;
         gridBagConstraints.weighty = 4.0;
-        crazyPanel1.add(jLabel7, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
-        gridBagConstraints.weightx = 40.0;
-        gridBagConstraints.weighty = 4.0;
-        crazyPanel1.add(jDateChooser1, gridBagConstraints);
+        billPanel.add(jLabel7, gridBagConstraints);
 
         jLabel8.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -141,16 +133,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 4.4;
         gridBagConstraints.weighty = 4.0;
-        crazyPanel1.add(jLabel8, gridBagConstraints);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Name 1", "Name 2", "Name 3", "Name 4", "Name 5" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 40.0;
-        gridBagConstraints.weighty = 4.0;
-        crazyPanel1.add(jComboBox1, gridBagConstraints);
+        billPanel.add(jLabel8, gridBagConstraints);
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -161,16 +144,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 4.4;
         gridBagConstraints.weighty = 4.0;
-        crazyPanel1.add(jLabel9, gridBagConstraints);
-
-        jTextField2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 40.0;
-        gridBagConstraints.weighty = 4.0;
-        crazyPanel1.add(jTextField2, gridBagConstraints);
+        billPanel.add(jLabel9, gridBagConstraints);
 
         jLabel10.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -181,13 +155,37 @@ public class Form_Maintenance extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 4.4;
         gridBagConstraints.weighty = 4.0;
-        crazyPanel1.add(jLabel10, gridBagConstraints);
+        billPanel.add(jLabel10, gridBagConstraints);
+
+        txtBillNo.setPlaceholder("Enter Bill Number");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 50.0;
+        billPanel.add(txtBillNo, gridBagConstraints);
+
+        txtName.setPlaceholder("Enter Name");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.weightx = 40.0;
-        gridBagConstraints.weighty = 4.0;
-        crazyPanel1.add(jDateChooser2, gridBagConstraints);
+        billPanel.add(txtName, gridBagConstraints);
+
+        txtFlat.setPlaceholder("Enter Flat Number");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        billPanel.add(txtFlat, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        billPanel.add(billDate, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        billPanel.add(dueDate, gridBagConstraints);
 
         printBill.setBackground(new java.awt.Color(0, 153, 51));
         printBill.setForeground(new java.awt.Color(255, 255, 255));
@@ -201,16 +199,23 @@ public class Form_Maintenance extends javax.swing.JPanel {
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"98uru`h9k9u", "89u8u8u98j", "8988", "u8u988"},
-                {"u988h", "8u8", "988n", "8u98j"},
-                {"98un", "98u98jn", "9898j", "989un"},
-                {"9u9j", "98unu", "u8j09", "ujn00"}
+
             },
             new String [] {
                 "Bill No", "Bill Date", "Name", "Flat No.:"
             }
         ));
         jScrollPane1.setViewportView(table);
+
+        addBill.setBackground(new java.awt.Color(121, 157, 242));
+        addBill.setForeground(new java.awt.Color(255, 255, 255));
+        addBill.setText("Add");
+        addBill.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        addBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBillActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -222,10 +227,15 @@ public class Form_Maintenance extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(notice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(crazyPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(printBill, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(billPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(printBill, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(addBill, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44)))
                         .addComponent(jScrollPane1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -239,9 +249,11 @@ public class Form_Maintenance extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(crazyPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(billPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(printBill, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(printBill, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                            .addComponent(addBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -270,12 +282,34 @@ public class Form_Maintenance extends javax.swing.JPanel {
         return null;
     }//GEN-LAST:event_printBillActionPerformed
 
+    private void addBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBillActionPerformed
+        String bill_Number = txtBillNo.getText().toString();
+        String bill_Name = txtName.getText().toString();
+        String flat_Number = txtFlat.getText().toString();
+
+        // Format the Date
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+        String bill_Date = dateFormat.format(billDate.getDate());
+        String due_Date = dateFormat.format(dueDate.getDate());
+
+        // Adding data into table 
+        DefaultTableModel defaultTableModel = (DefaultTableModel) table.getModel();
+        defaultTableModel.addRow(new Object[]{bill_Number, bill_Date, bill_Name, flat_Number, due_Date});
+
+        // Clear the fields
+        txtBillNo.setText("");
+        txtName.setText("");
+        txtFlat.setText("");
+        billDate.setDate(null);
+        dueDate.setDate(null);
+    }//GEN-LAST:event_addBillActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private raven.crazypanel.CrazyPanel crazyPanel1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.society.swing.Button addBill;
+    private com.toedter.calendar.JDateChooser billDate;
+    private raven.crazypanel.CrazyPanel billPanel;
+    private com.toedter.calendar.JDateChooser dueDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -288,10 +322,11 @@ public class Form_Maintenance extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private com.society.swing.PanelRound notice;
     private com.society.swing.Button printBill;
     private com.society.swing.Table table;
+    private com.society.swing.TextField txtBillNo;
+    private com.society.swing.TextField txtFlat;
+    private com.society.swing.TextField txtName;
     // End of variables declaration//GEN-END:variables
 }
