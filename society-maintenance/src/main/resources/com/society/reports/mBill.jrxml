@@ -2,7 +2,11 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.7715610000000022"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="bill_number" class="java.lang.String"/>
+	<parameter name="bill_date" class="java.util.Date"/>
+	<parameter name="flat_number" class="java.lang.String"/>
+	<parameter name="due_date" class="java.util.Date"/>
 	<queryString>
 		<![CDATA[SELECT 
     b.bill_number,
@@ -21,7 +25,7 @@ FROM
 JOIN 
     Bill_Details d ON b.bill_id = d.bill_id
 WHERE 
-    b.bill_id = 1; ]]>
+    b.bill_id = 1;]]>
 	</queryString>
 	<field name="bill_number" class="java.lang.String"/>
 	<field name="bill_date" class="java.sql.Date"/>
@@ -74,16 +78,6 @@ WHERE
 				</textElement>
 				<text><![CDATA[Bill Date:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="133" y="53" width="80" height="15"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{bill_number}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="133" y="68" width="80" height="15"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{bill_date}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="345" y="53" width="61" height="15"/>
 				<textElement>
@@ -99,19 +93,29 @@ WHERE
 				<text><![CDATA[Due Date:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="406" y="53" width="82" height="15"/>
+				<reportElement x="133" y="53" width="80" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{bill_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="68" width="80" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{bill_date}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="406" y="53" width="72" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{flat_number}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="406" y="68" width="82" height="15"/>
+				<reportElement x="406" y="68" width="72" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{due_date}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="34" splitType="Stretch">
+		<band height="37" splitType="Stretch">
 			<staticText>
 				<reportElement x="39" y="12" width="34" height="13"/>
 				<textElement/>
@@ -137,7 +141,7 @@ WHERE
 	<detail>
 		<band height="187" splitType="Stretch">
 			<staticText>
-				<reportElement x="27" y="14" width="46" height="20"/>
+				<reportElement x="22" y="14" width="46" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
@@ -151,19 +155,19 @@ WHERE
 				<text><![CDATA[Description]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="444" y="14" width="75" height="20"/>
+				<reportElement x="449" y="14" width="75" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Amount]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="27" y="34" width="46" height="15"/>
+				<reportElement x="22" y="34" width="46" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{line_number}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="444" y="34" width="75" height="15"/>
+				<reportElement x="449" y="34" width="75" height="15"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
 			</textField>

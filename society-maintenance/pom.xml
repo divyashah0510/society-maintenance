@@ -46,6 +46,16 @@
             <artifactId>jasperreports</artifactId>
             <version>6.21.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>3.0.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>1.12.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -62,6 +72,7 @@
                     <include>**/*.jpg</include>
                     <include>**/*.gif</include>
                     <include>**/*.properties</include>
+                    <include>**/*.jrxml</include>
                 </includes>
             </resource>
         </resources>

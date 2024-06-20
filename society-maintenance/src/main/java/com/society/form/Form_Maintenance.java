@@ -1,6 +1,5 @@
 package com.society.form;
 
-import com.society.components.MessageDialog;
 import java.awt.print.PrinterException;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
@@ -205,6 +204,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
                 "Bill No", "Bill Date", "Name", "Flat No.:"
             }
         ));
+        table.setGridColor(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(table);
 
         addBill.setBackground(new java.awt.Color(121, 157, 242));
@@ -261,7 +261,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
 
     private void printBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printBillActionPerformed
         MessageFormat header = new MessageFormat("Disha Residency CO OP Housing Society.");
-        MessageFormat footer = new MessageFormat("Dish Residency Housing Society");
+        MessageFormat footer = new MessageFormat("Page {0}"); //to add image here
         try {
             System.out.println("Performing print action");
             table.print(JTable.PrintMode.NORMAL, header, footer);
