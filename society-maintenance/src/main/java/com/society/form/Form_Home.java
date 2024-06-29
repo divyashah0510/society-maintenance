@@ -13,9 +13,9 @@ public class Form_Home extends javax.swing.JPanel {
 
     public Form_Home() {
         initComponents();
-        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/society/icons/stock.png")), "Stock Total", "$200000", "Increased by 60%"));
-        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/society/icons/profit.png")), "Total Profit", "$15000", "Increased by 25%"));
-        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/society/icons/flag.png")), "Unique Visitors", "$300000", "Increased by 70%"));
+        card1.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/society/icons/profit.png")), "Society Fund", "$15000", "Increased by 25%"));
+        card2.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/society/icons/debt.png")), "Total Debts", "$200000", "Increased by 60%"));
+        card3.setData(new Model_Card(new ImageIcon(getClass().getResource("/com/society/icons/credit.png")), "Total Credtits", "$300000", "Increased by 70%"));
         //  add row table
         spTable.setVerticalScrollBar(new ScrollBar());
         spTable.getVerticalScrollBar().setBackground(Color.WHITE);
@@ -23,10 +23,10 @@ public class Form_Home extends javax.swing.JPanel {
         JPanel p = new JPanel();
         p.setBackground(Color.WHITE);
         spTable.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
-        table.addRow(new Object[]{"Mike Bhand", "mikebhand@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
+        table.addRow(new Object[]{"Mike Bhand", "mikebhand@gmail.com", "Admin", "25 Apr,2018", StatusType.APPROVED});
         table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", StatusType.APPROVED});
         table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", StatusType.REJECTED});
+        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", StatusType.APPROVED});
         table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
         table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", StatusType.APPROVED});
         table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", StatusType.APPROVED});
@@ -72,21 +72,20 @@ public class Form_Home extends javax.swing.JPanel {
         spTable = new javax.swing.JScrollPane();
         table = new com.society.swing.Table();
 
-        setBackground(new java.awt.Color(242, 242, 242));
-        setBorder(null);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 
-        card1.setColor1(new java.awt.Color(142, 142, 250));
-        card1.setColor2(new java.awt.Color(123, 123, 245));
+        card1.setColor1(new java.awt.Color(35, 166, 97));
+        card1.setColor2(new java.awt.Color(22, 116, 66));
         panel.add(card1);
 
-        card2.setColor1(new java.awt.Color(186, 123, 247));
-        card2.setColor2(new java.awt.Color(167, 94, 236));
+        card2.setColor1(new java.awt.Color(35, 166, 97));
+        card2.setColor2(new java.awt.Color(22, 116, 66));
         panel.add(card2);
 
-        card3.setColor1(new java.awt.Color(247, 208, 62));
-        card3.setColor2(new java.awt.Color(211, 184, 61));
+        card3.setColor1(new java.awt.Color(35, 166, 97));
+        card3.setColor2(new java.awt.Color(22, 116, 66));
         panel.add(card3);
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
@@ -94,7 +93,7 @@ public class Form_Home extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Standard Table Design");
+        jLabel1.setText("Society Member Details");
 
         spTable.setBorder(null);
 

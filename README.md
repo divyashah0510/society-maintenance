@@ -40,6 +40,8 @@ It is a java based project which is used to manage the maintenance of a society.
 
 ![image](/screenshots/image3.png)
 
+![image](/screenshots/image4.png)
+
 # Developed by
 
 - Divya Shah

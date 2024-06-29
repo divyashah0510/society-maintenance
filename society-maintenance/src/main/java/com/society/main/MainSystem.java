@@ -13,6 +13,8 @@ import com.society.form.Form_Profile;
 import com.society.form.Form_Reports;
 import com.society.models.ModelUser;
 import java.awt.Color;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 public class MainSystem extends javax.swing.JFrame {
@@ -27,8 +29,15 @@ public class MainSystem extends javax.swing.JFrame {
     private Form_Amenities amenities;
     private Form_Reports reports;
     private Form_Profile profile;
+    public URL logoUrl = getClass().getResource("/com/society/icons/logoS.png");
 
     public MainSystem(ModelUser user) {
+        if (logoUrl != null) {
+            this.setIconImage(new ImageIcon(logoUrl).getImage());
+            this.setTitle("DashBoard");
+        } else {
+            System.err.println("Resource not found: /com/society/icons/logoS.png");
+        }
         this.user = user;
         initComponents();
         setBackground(new Color(0, 0, 0, 0));

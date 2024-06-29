@@ -13,10 +13,12 @@ import com.society.services.ServiceMail;
 import com.society.services.ServiceUser;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
@@ -36,10 +38,17 @@ public class Main extends javax.swing.JFrame {
     private final double addSize = 30;
     private final double coverSize = 40;
     private final double loginSize = 60;
+    public URL logoUrl = getClass().getResource("/com/society/icons/logoS.png");
 
     public Main() {
         initComponents();
         init();
+        if (logoUrl != null) {
+            this.setIconImage(new ImageIcon(logoUrl).getImage());
+            this.setTitle("Society Maintainence App");
+        } else {
+            System.err.println("Resource not found: /com/society/icons/logoS.png");
+        }
     }
 
     private void init() {

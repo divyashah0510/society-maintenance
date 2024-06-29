@@ -22,6 +22,7 @@ public class MenuItem extends javax.swing.JPanel {
             lbIcon.setText(data.getName());
             lbIcon.setFont(new Font("sansserif", 1, 12));
             lbName.setVisible(false);
+
         } else {
             lbName.setText(" ");
         }
@@ -75,7 +76,7 @@ public class MenuItem extends javax.swing.JPanel {
             if (selected) {
                 g2.setColor(new Color(255, 255, 255, 80));
             } else {
-                g2.setColor(new Color(255, 255, 255, 20));
+                g2.setColor(new Color(255, 255, 255, 80));
             }
             g2.fillRoundRect(10, 0, getWidth() - 20, getHeight(), 5, 5);
         }
