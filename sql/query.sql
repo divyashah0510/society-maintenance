@@ -13,3 +13,12 @@ CREATE TABLE `user` (
   `Status` varchar(255) DEFAULT '',
   PRIMARY KEY (`UserID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `userdetails` (
+  `UserID` int(10) unsigned NOT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  `Email` varchar(255) DEFAULT NULL,
+  `MemberType` varchar(255) DEFAULT NULL,
+  `ImagePath` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+-- Now adding

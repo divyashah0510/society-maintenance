@@ -42,6 +42,14 @@ public class ModelUser {
         this.verifyCode = verifyCode;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     public ModelUser() {
     }
 
@@ -52,6 +60,7 @@ public class ModelUser {
         this.password = password;
         this.verifyCode = verifyCode;
     }
+
     public ModelUser(int userID, String userName, String email, String password) {
         this.userID = userID;
         this.userName = userName;
@@ -59,9 +68,19 @@ public class ModelUser {
         this.password = password;
     }
 
+    public ModelUser(int userID, String userName, String email, String password, String verifyCode, String imagePath) {
+        this.userID = userID;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.verifyCode = verifyCode;
+        this.imagePath = imagePath;
+    }
+
     private int userID;
     private String userName;
     private String email;
     private String password;
     private String verifyCode;
+    private String imagePath;
 }
