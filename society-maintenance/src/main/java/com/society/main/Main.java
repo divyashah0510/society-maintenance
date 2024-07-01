@@ -309,10 +309,13 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         IntelliJTheme.setup(Main.class.getResourceAsStream("/template.theme.json"));
         FlatMacLightLaf.setup();
+
+        System.out.println("Attempting to connect to the database...");
         try {
             DatabaseConnection.getInstance().connectToDatabase();
+            System.out.println("Connected to the database.");
         } catch (SQLException e) {
-            System.out.println("Error is " + e);
+            System.out.println("Error connecting " + e);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override

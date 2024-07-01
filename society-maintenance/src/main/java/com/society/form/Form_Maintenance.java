@@ -1,6 +1,8 @@
 package com.society.form;
 
+import com.society.services.ServiceUser;
 import java.awt.print.PrinterException;
+import java.sql.SQLException;
 import java.text.MessageFormat;
 import java.time.LocalDate;
 import javax.swing.JFrame;
@@ -306,16 +308,22 @@ public class Form_Maintenance extends javax.swing.JPanel {
     }//GEN-LAST:event_printBillActionPerformed
 
     private void addBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBillActionPerformed
-        String bill_Number = txtBillNo.getText();
-        String bill_Name = txtName.getText();
-        String flat_Number = txtFlat.getText();
-        String bill_Date = billDate.getText(); //billDatePicker.getDateFormat();
-        String due_Date = dueDate.getText();//dueDatePicker.getDateFormat();
-
+        String bill_Number = txtBillNo.getText().toString();
+        String bill_Name = txtName.getText().toString();
+        String flat_Number = txtFlat.getText().toString();
+        String bill_Date = billDate.getText().toString();
+        String due_Date = dueDate.getText().toString();
         // Adding data into table 
         DefaultTableModel defaultTableModel = (DefaultTableModel) table.getModel();
         defaultTableModel.addRow(new Object[]{bill_Number, bill_Date, bill_Name, flat_Number, due_Date});
 
+        // Insert into the Database;
+        ServiceUser serviceUser = new ServiceUser();
+        try {
+            serviceUser.insertBill(bill_Number, bill_Date, due_Date, flat_Number, due_Date);
+        } catch (SQLException e) {
+            System.err.println("Error is " + e);
+        }
         // Clear the fields
         txtBillNo.setText("");
         txtName.setText("");

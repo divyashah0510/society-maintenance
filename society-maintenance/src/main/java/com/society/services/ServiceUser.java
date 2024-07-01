@@ -132,4 +132,21 @@ public class ServiceUser {
         }
         return verify;
     }
+
+    public void insertBill(String billNumber, String billDate, String userName, String flatNumber, String dueDate) throws SQLException {
+        String query = "INSERT INTO member_details (bill_id, bill_date, userName, flat_number, due_date) VALUES (?, ?, ?, ?, ?)";
+        System.out.println("Query is " + query);
+        try (PreparedStatement p = con.prepareStatement(query)) {
+            p.setString(1, billNumber);
+            p.setString(2, billDate);
+            p.setString(3, userName);
+            p.setString(4, flatNumber);
+            p.setString(5, dueDate);
+            System.out.println("Added");
+            p.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Error in query " + e);
+        }
+    }
+
 }

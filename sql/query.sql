@@ -6,7 +6,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `UserID` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `UserName` varchar(255) DEFAULT NULL,
+  `UserName` varchar(255) NOT NULL,
   `Email` varchar(255) DEFAULT NULL,
   `Password` varchar(255) DEFAULT NULL,
   `VerifyCode` varchar(255) DEFAULT NULL,
