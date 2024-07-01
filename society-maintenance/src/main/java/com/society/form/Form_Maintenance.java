@@ -2,19 +2,37 @@ package com.society.form;
 
 import java.awt.print.PrinterException;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import raven.datetime.component.date.DatePicker;
+import raven.datetime.component.date.DateSelectionAble;
 
 public class Form_Maintenance extends javax.swing.JPanel {
 
+    private DatePicker billDatePicker;
+    private DatePicker dueDatePicker;
+
     public Form_Maintenance() {
         initComponents();
-        initMaintenance_Bill();
+        btnClass();
     }
 
-    public void initMaintenance_Bill() {
+    private void btnClass() {
+        billDatePicker = new DatePicker();
+        billDatePicker.setEditor(billDate);
+//        billDatePicker.setDateSelectionMode(DatePicker.DateSelectionMode.BETWEEN_DATE_SELECTED);
+//        billDatePicker.setSeparator(" to date ");
+//        billDatePicker.setUsePanelOption(true);
+        billDatePicker.setDateSelectionAble(new DateSelectionAble() {
+            @Override
+            public boolean isDateSelectedAble(LocalDate ld) {
+                return !ld.isAfter(LocalDate.now());
+            }
+        });
+        dueDatePicker = new DatePicker();
+        dueDatePicker.setEditor(dueDate);
 
     }
 
@@ -39,30 +57,28 @@ public class Form_Maintenance extends javax.swing.JPanel {
         txtBillNo = new com.society.swing.TextField();
         txtName = new com.society.swing.TextField();
         txtFlat = new com.society.swing.TextField();
-        billDate = new com.toedter.calendar.JDateChooser();
-        dueDate = new com.toedter.calendar.JDateChooser();
+        billDate = new javax.swing.JFormattedTextField();
+        dueDate = new javax.swing.JFormattedTextField();
         printBill = new com.society.swing.Button();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new com.society.swing.Table();
         addBill = new com.society.swing.Button();
 
-        setBackground(new java.awt.Color(242, 242, 242));
-
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("FiraCode Nerd Font", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Form Maintenance");
+        jLabel1.setText("Maintenance Form");
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 3, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("FiraCode Nerd Font", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Important Note:");
 
-        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 12)); // NOI18N
         jLabel3.setText("1. IF PAYMENT IS NOT MADE ON OR BEFORE DUE DATE INTEREST @ 20% WILL BE CHARGED");
 
-        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 12)); // NOI18N
         jLabel4.setText("2. PLEASE ISSUE CROSSED ACCOUNT PAYEE CHEQUE IN THE NAME OF THE SOCIETY ONLY");
 
-        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 12)); // NOI18N
         jLabel5.setText("3. NO OFFICE BEARER OR EMPLOYEE OF THE SOCIETY IS AUTHORIZED TO ACCEPT PAYEMENT IN CASH");
 
         javax.swing.GroupLayout noticeLayout = new javax.swing.GroupLayout(notice);
@@ -98,10 +114,10 @@ public class Form_Maintenance extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        billPanel.setBackground(new java.awt.Color(242, 242, 242));
+        billPanel.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 14)); // NOI18N
         billPanel.setLayout(new java.awt.GridBagLayout());
 
-        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel6.setText("Bill No.:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -112,7 +128,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
         gridBagConstraints.weighty = 4.0;
         billPanel.add(jLabel6, gridBagConstraints);
 
-        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("Bill Date:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -123,7 +139,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
         gridBagConstraints.weighty = 4.0;
         billPanel.add(jLabel7, gridBagConstraints);
 
-        jLabel8.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel8.setText("Name:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -134,7 +150,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
         gridBagConstraints.weighty = 4.0;
         billPanel.add(jLabel8, gridBagConstraints);
 
-        jLabel9.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("Flat No.:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -145,7 +161,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
         gridBagConstraints.weighty = 4.0;
         billPanel.add(jLabel9, gridBagConstraints);
 
-        jLabel10.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel10.setText("Due Date:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -156,12 +172,14 @@ public class Form_Maintenance extends javax.swing.JPanel {
         gridBagConstraints.weighty = 4.0;
         billPanel.add(jLabel10, gridBagConstraints);
 
+        txtBillNo.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 14)); // NOI18N
         txtBillNo.setPlaceholder("Enter Bill Number");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.weightx = 50.0;
         billPanel.add(txtBillNo, gridBagConstraints);
 
+        txtName.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 14)); // NOI18N
         txtName.setPlaceholder("Enter Name");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -169,17 +187,22 @@ public class Form_Maintenance extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         billPanel.add(txtName, gridBagConstraints);
 
+        txtFlat.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 14)); // NOI18N
         txtFlat.setPlaceholder("Enter Flat Number");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         billPanel.add(txtFlat, gridBagConstraints);
+
+        billDate.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         billPanel.add(billDate, gridBagConstraints);
+
+        dueDate.setFont(new java.awt.Font("FiraCode Nerd Font", 0, 14)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -241,12 +264,12 @@ public class Form_Maintenance extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addComponent(notice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(billPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,7 +278,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
                             .addComponent(printBill, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                             .addComponent(addBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -264,7 +287,7 @@ public class Form_Maintenance extends javax.swing.JPanel {
         MessageFormat footer = new MessageFormat("Page {0}"); //to add image here
         try {
             System.out.println("Performing print action");
-            table.print(JTable.PrintMode.NORMAL, header, footer);
+            table.print(JTable.PrintMode.FIT_WIDTH, header, footer);
 
         } catch (PrinterException e) {
             System.err.println("Error is " + e);
@@ -283,14 +306,11 @@ public class Form_Maintenance extends javax.swing.JPanel {
     }//GEN-LAST:event_printBillActionPerformed
 
     private void addBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBillActionPerformed
-        String bill_Number = txtBillNo.getText().toString();
-        String bill_Name = txtName.getText().toString();
-        String flat_Number = txtFlat.getText().toString();
-
-        // Format the Date
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-        String bill_Date = dateFormat.format(billDate.getDate());
-        String due_Date = dateFormat.format(dueDate.getDate());
+        String bill_Number = txtBillNo.getText();
+        String bill_Name = txtName.getText();
+        String flat_Number = txtFlat.getText();
+        String bill_Date = billDate.getText(); //billDatePicker.getDateFormat();
+        String due_Date = dueDate.getText();//dueDatePicker.getDateFormat();
 
         // Adding data into table 
         DefaultTableModel defaultTableModel = (DefaultTableModel) table.getModel();
@@ -300,16 +320,16 @@ public class Form_Maintenance extends javax.swing.JPanel {
         txtBillNo.setText("");
         txtName.setText("");
         txtFlat.setText("");
-        billDate.setDate(null);
-        dueDate.setDate(null);
+        billDate.setText(null);
+        dueDate.setText(null);
     }//GEN-LAST:event_addBillActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.society.swing.Button addBill;
-    private com.toedter.calendar.JDateChooser billDate;
+    private javax.swing.JFormattedTextField billDate;
     private raven.crazypanel.CrazyPanel billPanel;
-    private com.toedter.calendar.JDateChooser dueDate;
+    private javax.swing.JFormattedTextField dueDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

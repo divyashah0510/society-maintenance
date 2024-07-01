@@ -1,5 +1,7 @@
 package com.society.main;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.IntelliJTheme;
 import com.society.form.Form_Residents;
 import com.society.form.Form_Maintenance;
 import com.society.form.Form_Profile;
@@ -86,8 +88,10 @@ public class MainSystem extends javax.swing.JFrame {
 //                }
             }
         });
-        profile = new Form_Profile(user);
-        setForm(profile);
+//        profile = new Form_Profile(user);
+//        setForm(profile);
+        formMaintainence = new Form_Maintenance();
+        setForm(formMaintainence);
 //        home = new Form_Home();
 //        setForm(home);
         
@@ -179,22 +183,8 @@ public class MainSystem extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public static void main(ModelUser user) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        IntelliJTheme.setup(Main.class.getResourceAsStream("/template.theme.json"));
+        FlatLightLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainSystem(user).setVisible(true);
