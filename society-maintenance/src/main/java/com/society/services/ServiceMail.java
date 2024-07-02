@@ -23,7 +23,7 @@ public class ServiceMail {
         prop.put("mail.smtp.starttls.enable", "true");
 
         String username = "delmarduston@gmail.com";
-        String password = "pkvkdhndtzelcbpp";  // Your email password here
+        String password = "arjmjnntjtadcqsa";  // Your email password here 
 
         Session session = Session.getInstance(prop, new Authenticator() {
             @Override
