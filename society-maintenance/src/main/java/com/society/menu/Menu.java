@@ -1,5 +1,6 @@
 package com.society.menu;
 
+import com.society.models.ModelUser;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -26,53 +27,57 @@ public class Menu extends JComponent {
 
     private MenuEvent event;
     private MigLayout layout;
-    // private String[][] menuItems = new String[][]{
-    // {"Dashboard"},
-    // {"Email", "Inbox", "Read", "Compost"},
-    // {"Chat"},
-    // {"Calendar"},
-    // {"UI Kit", "Accordion", "Alerts", "Badges", "Breadcrumbs", "Buttons", "Button
-    // group"},
-    // {"Advanced UI", "Cropper", "Owl Carousel", "Sweet Alert"},
-    // {"Forms", "Basic Elements", "Advanced Elements", "SEditors", "Wizard"},
-    // {"Charts", "Apex", "Flot", "Peity", "Sparkline"},
-    // {"Table", "Basic Tables", "Data Table"},
-    // {"Icons", "Feather Icons", "Flag Icons", "Mdi Icons"},
-    // {"Special Pages", "Blank page", "Faq", "Invoice", "Profile", "Pricing",
-    // "Timeline"}
-    // };
-    private String[][] menuItems = new String[][] {
-            { "Dashboard" },
-            { "Notices", "Inbox", "Read", "Announcements" },
-            { "Community Chat" },
-            { "Events & Bookings" },
-            { "Maintenance Requests", "Submit Request", "Track Request" },
-            { "Payments & Dues", "View Dues", "Make Payment" },
-            { "Documents & Downloads", "Society Rules", "Forms" },
-            { "Security & Staff", "View Staff", "Report Issue" },
-            { "Amenities", "Book Amenity", "View Schedule" },
-            { "Complaints & Feedback", "Submit Complaint", "View Feedback" },
-            { "Emergency Contacts", "Police", "Fire Department", "Hospital" },
-            { "Visitor Management", "Add Visitor", "View Visitors" },
-            { "Polls & Surveys", "Active Polls", "Submit Survey" },
-            { "Parking Management", "View Parking", "Request Space" },
-            { "Help Center", "FAQs", "Contact Support" },
-            { "Reports & Analytics", "Maintenance Reports", "Financial Reports" },
-            { "Service Providers", "Electricians", "Plumbers", "Carpenters" },
-            { "Lost & Found", "Report Lost Item", "View Found Items" },
-            { "Events Calendar", "Upcoming Events", "Past Events" },
-            { "Important Notices", "Critical Updates", "General Notices" }
+    // For Admin
+    private final String[][] menuItemsAdmin = new String[][]{
+        {"Dashboard"},
+        {"Maintenance Notices", "View Notices", "Add Notice"},
+        {"Payments & Dues", "View Payments", "Track Dues"},
+        {"Complaints", "View Complaints", "Resolve Complaints"},
+        {"Visitor Management", "Add Visitor", "View Visitor Log"},
+        {"Resident Directory", "View Residents", "Manage Residents"},
+        {"Reports & Analytics", "Maintenance Reports", "Financial Reports"},
+        {"Help Center", "FAQs", "Contact Support"}
     };
 
-    public Menu() {
+    // For Client
+    private final String[][] menuItemsClient = new String[][]{
+        {"Dashboard"},
+        {"Notices", "View Notices"},
+        {"Payments", "View Dues", "Make Payment"},
+        {"Complaints", "Submit Complaint", "Track Complaint"},
+        {"Visitor Management", "Pre-Approve Visitor", "View Visitor Log"},
+        {"Resident Directory", "View Residents"},
+        {"Help Center", "FAQs", "Contact Support"}
+    };
+
+    // This will hold the menu items based on the user role
+    private String[][] menuItems;
+
+    public Menu(ModelUser user) {
+        System.out.println(user.getRole());
+        if (user.getRole() != null) {
+            if (user.getRole().equals("admin")) {
+                System.out.println("Admin logged in");
+                menuItems = menuItemsAdmin;
+            } else {
+                System.out.println("Client logged in");
+                menuItems = menuItemsClient;
+            }
+        } else {
+            System.out.println("Unexpected error");
+        }
+
         init();
     }
+//    public Menu() {
+//        init();
+//    }
 
     private void init() {
         layout = new MigLayout("wrap 1, fillx, gapy 0, inset 2", "fill");
         setLayout(layout);
         setOpaque(true);
-        // Init MenuItem
+        // Init MenuItem based on role
         for (int i = 0; i < menuItems.length; i++) {
             addMenu(menuItems[i][0], i);
         }
@@ -124,7 +129,7 @@ public class Menu extends JComponent {
         panel.setName(index + "");
         panel.setBackground(Color.decode("#1c8c54"));
         for (int i = 1; i < length; i++) {
-            MenuItem subItem = new MenuItem(menuItems[index][i], i, false);
+            MenuItem subItem = new MenuItem(menuItemsAdmin[index][i], i, false);
             subItem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {

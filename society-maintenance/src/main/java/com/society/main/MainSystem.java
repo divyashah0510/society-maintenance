@@ -13,13 +13,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 public class MainSystem extends javax.swing.JFrame {
-    
+
     private final ModelUser user;
     private Form_Residents formResidents;
     private Form_Maintenance formMaintainence;
     private Form_Profile profile;
     public URL logoUrl = getClass().getResource("/com/society/icons/logoS.png");
-    
+
     public MainSystem(ModelUser user) {
         if (logoUrl != null) {
             this.setIconImage(new ImageIcon(logoUrl).getImage());
@@ -30,80 +30,55 @@ public class MainSystem extends javax.swing.JFrame {
         this.user = user;
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
+        // Ensure the window is not resizable
+        setResizable(false);
+
+        // Set a fixed size for the frame (Example: width = 1232, height = 600)
+        setSize(1232, 600);
 
 //        lbUser.setText(user.getUserName());
         menu.setEvent(new MenuEvent() {
             @Override
             public void selected(int index, int subIndex) {
-                System.out.println(index + "<- Main Index  Sub Index ->" + subIndex);
-//                switch (index) {
-//                    case 0:
-//                        home = new Form_Home();
-//                        setForm(home);
-//                        break;
-//                    case 1:
-//                        formResidents = new Form_Residents();
-//                        setForm(formResidents);
-//                        break;
-//                    case 2:
-//                        formMaintainence = new Form_Maintenance();
-//                        setForm(formMaintainence);
-//                        break;
-//                    case 3:
-//                        formEvents = new Form_Events();
-//                        setForm(formEvents);
-//                        break;
-//                    case 4:
-//                        formPayments = new Form_Payments();
-//                        setForm(formPayments);
-//                        break;
-//                    case 8:
-//                        formNotices = new Form_Notices();
-//                        setForm(formNotices);
-//                        break;
-//                    case 9:
-//                        amenities = new Form_Amenities();
-//                        setForm(amenities);
-//                        break;
-//                    case 10:
-//                        reports = new Form_Reports();
-//                        setForm(reports);
-//                        break;
-//                    case 11:
-//                        profile = new Form_Profile(user);
-//                        setForm(profile);
-//                        break;
-//                    case 12:
-//                        MessageDialog obj = new MessageDialog(MainSystem.this);
-//                        obj.showMessage("LogOut", "Are you sure you want to Logout ??");
-//                        if (obj.getMessageType() == MessageDialog.MessageType.OK) {
-//                            System.out.println("User click ok");
-//                            
-//                        } else {
-//                            System.out.println("User click cancel");
-//                        }
-//                        break;
-//                    default:
-//                        throw new AssertionError();
-//                }
+                switch (index) {
+                    case 0:
+                        break;
+                    case 1:
+                        formResidents = new Form_Residents();
+                        setForm(formResidents);
+                        break;
+                    case 2:
+                        formMaintainence = new Form_Maintenance();
+                        setForm(formMaintainence);
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 8:
+                        break;
+                    case 9:
+                        break;
+                    case 10:
+                        break;
+                    case 11:
+                        profile = new Form_Profile(user);
+                        setForm(profile);
+                        break;
+                    default:
+                        throw new AssertionError();
+                }
             }
         });
-//        profile = new Form_Profile(user);
-//        setForm(profile);
-        formMaintainence = new Form_Maintenance();
-        setForm(formMaintainence);
-//        home = new Form_Home();
-//        setForm(home);
-        
     }
-    
+
     private void setForm(JComponent com) {
         mainPanel.removeAll();
         mainPanel.add(com);
         mainPanel.repaint();
         mainPanel.revalidate();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -112,7 +87,7 @@ public class MainSystem extends javax.swing.JFrame {
         header1 = new com.society.components.Header();
         mainPanel = new com.society.swing.PanelRound();
         sp = new com.society.swing.ScrollPaneWin11();
-        menu = new com.society.menu.Menu();
+        menu = new com.society.menu.Menu(user);
         namePanel = new com.society.swing.PanelRound();
         jLabel1 = new javax.swing.JLabel();
 
@@ -122,6 +97,7 @@ public class MainSystem extends javax.swing.JFrame {
         setResizable(false);
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        panelBorder1.setPreferredSize(new java.awt.Dimension(1232, 600));
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
@@ -175,7 +151,7 @@ public class MainSystem extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE)
         );
 
         pack();
