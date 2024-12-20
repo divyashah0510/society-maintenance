@@ -21,7 +21,7 @@ public class ServiceUser {
 
     public ModelUser login(ModelLogin login) throws SQLException {
         ModelUser data = null;
-        String query = "SELECT UserID, UserName, Email FROM `user` WHERE BINARY(Email)=? AND BINARY(`Password`)=? AND `Status`='Verified' LIMIT 1";
+        String query = "SELECT UserID, UserName, Email, Role FROM `user` WHERE BINARY(Email)=? AND BINARY(`Password`)=? AND `Status`='Verified' LIMIT 1";
         try (PreparedStatement p = con.prepareStatement(query, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
             p.setString(1, login.getEmail());
             p.setString(2, login.getPassword());
@@ -30,7 +30,8 @@ public class ServiceUser {
                     int userID = r.getInt(1);
                     String userName = r.getString(2);
                     String email = r.getString(3);
-                    data = new ModelUser(userID, userName, email, "");
+                    String role = r.getString(4);  // Get role from database
+                    data = new ModelUser(userID, userName, email, "", role);  // Pass role to constructor
                 }
             }
         }
